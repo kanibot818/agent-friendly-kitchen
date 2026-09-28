@@ -21,7 +21,7 @@ export function ThemeToggleView() {
   return (
     <section
       data-testid="theme-toggle-root"
-      className="theme-toggle"
+      className="theme-toggle card"
       data-theme={state.theme}
     >
       <h2 data-testid="theme-toggle-title">主題設定</h2>
@@ -29,6 +29,7 @@ export function ThemeToggleView() {
       <div className="theme-toggle-actions">
         <button
           type="button"
+          className="btn btn-primary"
           data-testid="theme-toggle-btn"
           onClick={handleToggle}
           aria-pressed={state.theme === "dark"}

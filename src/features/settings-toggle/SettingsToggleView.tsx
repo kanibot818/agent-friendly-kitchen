@@ -15,12 +15,17 @@ export function SettingsToggleView() {
   const statusLabel = settingsToggleStatusLabel(state);
 
   return (
-    <section data-testid="settings-toggle-root" className="settings-toggle">
+    <section data-testid="settings-toggle-root" className="settings-toggle card">
       <h2 data-testid="settings-toggle-title">通知設定</h2>
       <p data-testid="settings-toggle-status">狀態：{statusLabel}</p>
       <div className="settings-toggle-actions">
         <button
           type="button"
+          className={
+            state.notificationsEnabled
+              ? "btn btn-success"
+              : "btn btn-primary"
+          }
           data-testid="settings-toggle-btn"
           onClick={handleToggle}
           aria-pressed={state.notificationsEnabled}

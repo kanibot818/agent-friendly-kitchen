@@ -14,7 +14,7 @@ export function HelloView() {
   };
 
   return (
-    <section data-testid="hello-root" className="hello">
+    <section data-testid="hello-root" className="hello card">
       <h1 data-testid="hello-title">Agent Friendly Kitchen</h1>
       <p data-testid="hello-message" data-tone={state.tone}>
         {state.message}
@@ -23,6 +23,7 @@ export function HelloView() {
       <div className="hello-actions">
         <button
           type="button"
+          className="btn btn-primary"
           data-testid="hello-greet-button"
           onClick={handleGreet}
         >
@@ -30,6 +31,7 @@ export function HelloView() {
         </button>
         <button
           type="button"
+          className="btn btn-secondary"
           data-testid="hello-reset-button"
           onClick={handleReset}
         >
