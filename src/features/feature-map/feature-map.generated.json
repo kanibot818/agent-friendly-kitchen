@@ -1,0 +1,72 @@
+{
+  "source": "FEATURE_MAP.md",
+  "features": [
+    {
+      "id": "hello",
+      "path": "/",
+      "publicApi": "src/features/hello/index.ts",
+      "testids": [
+        "app-shell",
+        "app-main",
+        "hello-root",
+        "hello-title",
+        "hello-message",
+        "hello-count",
+        "hello-last-greeted",
+        "hello-greet-button",
+        "hello-reset-button"
+      ]
+    },
+    {
+      "id": "user-profile",
+      "path": "/",
+      "publicApi": "src/features/user-profile/index.ts",
+      "testids": [
+        "user-profile-root",
+        "user-profile-title",
+        "user-profile-card",
+        "user-name",
+        "user-email",
+        "edit-btn",
+        "user-profile-form",
+        "user-name-input",
+        "user-email-input",
+        "save-btn",
+        "save-success"
+      ]
+    },
+    {
+      "id": "settings-toggle",
+      "path": "/",
+      "publicApi": "src/features/settings-toggle/index.ts",
+      "testids": [
+        "settings-toggle-root",
+        "settings-toggle-title",
+        "settings-toggle-status",
+        "settings-toggle-btn"
+      ]
+    },
+    {
+      "id": "theme-toggle",
+      "path": "/",
+      "publicApi": "src/features/theme-toggle/index.ts",
+      "testids": [
+        "theme-toggle-root",
+        "theme-toggle-title",
+        "theme-toggle-status",
+        "theme-toggle-btn"
+      ]
+    },
+    {
+      "id": "feature-map",
+      "path": "/",
+      "publicApi": "src/features/feature-map/index.ts",
+      "testids": [
+        "feature-map-root",
+        "feature-map-title",
+        "feature-map-summary",
+        "feature-map-list"
+      ]
+    }
+  ]
+}

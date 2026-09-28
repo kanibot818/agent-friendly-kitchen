@@ -2,7 +2,7 @@
 
 Navigation map for agent-friendly work in this repository.
 
-**Gate:** every `data-testid` listed in the tables below must exist in `src/**` (`./bin/verify` → `feature-map-testids`). Any PR that touches `src/features/**` must also update this file (`./bin/verify` → `feature-map-diff` vs merge-base with `origin/main`). CI `quality` runs the same `./bin/verify` and uploads `logs/verify.json` as Actions artifact `verify-logs`.
+**Gate:** every `data-testid` listed in the tables below must exist in `src/**` (`./bin/verify` → `feature-map-testids`). Any PR that touches `src/features/**` must also update this file (`./bin/verify` → `feature-map-diff` vs merge-base with `origin/main`). Committed `src/features/feature-map/feature-map.generated.json` must stay fresh vs this file (`./bin/verify` → `feature-map-generated`; regenerate with `node ./bin/export-feature-map.mjs`). CI `quality` runs the same `./bin/verify` and uploads `logs/verify.json` as Actions artifact `verify-logs`.
 
 ## Features
 
@@ -154,3 +154,38 @@ Navigation map for agent-friendly work in this repository.
 
 - Outside the feature, import only from `@/features/theme-toggle` or `./features/theme-toggle` (the barrel).
 - Deep imports such as `./features/theme-toggle/ThemeToggleView` are lint errors.
+
+### feature-map
+
+| Field | Value |
+| --- | --- |
+| Path | `/` (same page below theme-toggle) |
+| Public API | `src/features/feature-map/index.ts` |
+| UI | `FeatureMapView` |
+| Logic | `listFeatureMapEntries`, `countMappedTestids`, `featureMapSummaryLabel` |
+| Types | `FeatureMapDocument`, `FeatureMapEntry` |
+| Generated | `src/features/feature-map/feature-map.generated.json` (from `FEATURE_MAP.md` via `bin/export-feature-map.mjs`) |
+| Unit tests | `src/features/feature-map/featureMapLogic.test.ts` |
+| E2E | `e2e/feature-map.spec.ts` |
+
+#### User flows
+
+1. Open the app at `/`.
+2. Scroll to the Feature Map panel (`feature-map-root`).
+3. Read `feature-map-title` (`Feature Map`) and `feature-map-summary` (feature and testid counts from the generated JSON).
+4. Read `feature-map-list` entries; each feature shows its id, path, and mapped testid chips from the generated JSON (read-only; no disk access in the browser).
+
+#### data-testid list
+
+| testid | Element | Purpose |
+| --- | --- | --- |
+| `feature-map-root` | Section | Feature root for e2e |
+| `feature-map-title` | Heading | Feature title (`Feature Map`) |
+| `feature-map-summary` | Paragraph | Feature and testid counts |
+| `feature-map-list` | List | Container for mapped features |
+
+#### Import rules
+
+- Outside the feature, import only from `@/features/feature-map` or `./features/feature-map` (the barrel).
+- Deep imports such as `./features/feature-map/FeatureMapView` are lint errors.
+- The generated JSON is produced by `bin/export-feature-map.mjs`; `./bin/verify` → `feature-map-generated` fails if it is stale vs `FEATURE_MAP.md`.
