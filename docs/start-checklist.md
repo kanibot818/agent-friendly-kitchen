@@ -2,7 +2,7 @@
 
 入口：[OUTER_LOOP.md](../OUTER_LOOP.md)。自審見 [self-review.md](self-review.md)。
 
-在說 `Issue #N 開工` 之後、動手之前勾完：
+在說 `Issue #N 開工` 之後、動手之前：先跑 `./bin/kickoff-issue N`（印 Why／IN／OUT、切到最新 main、開 `feat/<n>-slug`、印本清單提醒；**不**實作、**不**開 PR），再勾完：
 
 - [ ] 讀完本 Issue（Why／IN／OUT／Acceptance）
 - [ ] 讀 `AGENTS.md`、`FEATURE_MAP.md`、相關 spec

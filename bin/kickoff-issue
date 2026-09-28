@@ -1,0 +1,156 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+usage() {
+  cat <<'USAGE'
+Usage: ./bin/kickoff-issue <issue-number>
+
+Half-auto outer-loop kickoff (no Cursor assign):
+  - prints Why / IN / OUT from the GitHub Issue
+  - updates main and creates branch feat/<n>-<slug>
+  - prints start-checklist reminders
+
+Does NOT implement the feature and does NOT open a PR.
+USAGE
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
+if [[ $# -ne 1 || ! "$1" =~ ^[0-9]+$ ]]; then
+  usage
+  exit 2
+fi
+
+ISSUE_NUM="$1"
+
+if ! command -v gh >/dev/null 2>&1; then
+  echo "error: gh is required (GitHub CLI)" >&2
+  exit 1
+fi
+
+if ! command -v git >/dev/null 2>&1; then
+  echo "error: git is required" >&2
+  exit 1
+fi
+
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "error: python3 is required" >&2
+  exit 1
+fi
+
+if [[ -n "$(git status --porcelain)" ]]; then
+  echo "error: working tree is dirty; commit or stash before kickoff" >&2
+  git status --short >&2
+  exit 1
+fi
+
+if ! ISSUE_JSON="$(gh issue view "$ISSUE_NUM" --json number,title,body,state,url 2>/dev/null)"; then
+  echo "error: unable to view issue #${ISSUE_NUM} (missing, or gh not authenticated)" >&2
+  exit 1
+fi
+
+TITLE="$(printf '%s' "$ISSUE_JSON" | python3 -c 'import json,sys; print(json.load(sys.stdin)["title"])')"
+STATE="$(printf '%s' "$ISSUE_JSON" | python3 -c 'import json,sys; print(json.load(sys.stdin)["state"])')"
+URL="$(printf '%s' "$ISSUE_JSON" | python3 -c 'import json,sys; print(json.load(sys.stdin)["url"])')"
+BODY="$(printf '%s' "$ISSUE_JSON" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("body") or "")')"
+
+if [[ "$STATE" != "OPEN" ]]; then
+  echo "error: issue #${ISSUE_NUM} is ${STATE}; kickoff only for OPEN issues" >&2
+  exit 1
+fi
+
+extract_section() {
+  local label="$1"
+  BODY="$BODY" LABEL="$label" python3 <<'PYSEC'
+import os, re
+label = os.environ["LABEL"]
+body = os.environ["BODY"]
+pattern = rf"(?im)^(?:#{{1,6}}\s*|\*\*|__)?\s*{re.escape(label)}\s*(?:\*\*|__)?\s*$"
+matches = list(re.finditer(pattern, body))
+if not matches:
+    print("(missing in issue body)")
+    raise SystemExit(0)
+start = matches[0].end()
+rest = body[start:]
+next_heading = re.search(r"(?m)^(?:#{1,6}\s|\*\*[A-Za-z／/])", rest)
+chunk = rest[: next_heading.start()] if next_heading else rest
+text = chunk.strip()
+print(text if text else "(empty)")
+PYSEC
+}
+
+slugify() {
+  TITLE_IN="$1" python3 <<'PYSLUG'
+import os, re, unicodedata
+title = os.environ["TITLE_IN"].strip()
+title = re.sub(r"^\[(?:feature|bug|chore|docs)\]\s*", "", title, flags=re.I)
+title = unicodedata.normalize("NFKD", title)
+title = title.encode("ascii", "ignore").decode("ascii")
+title = title.lower()
+title = re.sub(r"[^a-z0-9]+", "-", title)
+title = title.strip("-")
+parts = [p for p in title.split("-") if p]
+slug = "-".join(parts[:8]) or "issue"
+print(slug[:48].strip("-") or "issue")
+PYSLUG
+}
+
+SLUG="$(slugify "$TITLE")"
+BRANCH="feat/${ISSUE_NUM}-${SLUG}"
+
+WHY="$(extract_section "Why")"
+IN_SECTION="$(extract_section "IN")"
+OUT_SECTION="$(extract_section "OUT")"
+
+printf '%s\n' \
+  "== kickoff-issue #${ISSUE_NUM} ==" \
+  "Title: ${TITLE}" \
+  "URL:   ${URL}" \
+  "" \
+  "--- Why ---" \
+  "${WHY}" \
+  "" \
+  "--- IN ---" \
+  "${IN_SECTION}" \
+  "" \
+  "--- OUT ---" \
+  "${OUT_SECTION}" \
+  ""
+
+echo "== sync main =="
+git fetch origin main
+git checkout main
+git pull --ff-only origin main
+
+if git show-ref --verify --quiet "refs/heads/${BRANCH}"; then
+  echo "error: local branch already exists: ${BRANCH}" >&2
+  exit 1
+fi
+if git ls-remote --exit-code --heads origin "${BRANCH}" >/dev/null 2>&1; then
+  echo "error: remote branch already exists: origin/${BRANCH}" >&2
+  exit 1
+fi
+
+git checkout -b "${BRANCH}"
+
+printf '%s\n' \
+  "" \
+  "== branch ready ==" \
+  "${BRANCH}" \
+  "" \
+  "== start-checklist reminders ==" \
+  "After Issue #${ISSUE_NUM} 開工, finish docs/start-checklist.md before coding:" \
+  "  - [ ] Read this Issue (Why / IN / OUT / Acceptance)" \
+  "  - [ ] Read AGENTS.md, FEATURE_MAP.md, related specs" \
+  "  - [ ] Scope locked: do not expand OUT; do not rewrite Acceptance" \
+  "  - [ ] Confirm verify plan (what changes, how to prove)" \
+  "  - [ ] Escalate blockers first; do not force ahead" \
+  "" \
+  "This helper does NOT implement the feature and does NOT open a PR." \
+  "Next: implement on ${BRANCH}, run ./bin/verify, then open the PR yourself."
