@@ -2,7 +2,7 @@
 
 Navigation map for agent-friendly work in this repository.
 
-**Gate:** every `data-testid` listed in the tables below must exist in `src/**` (`./bin/verify` → `feature-map-testids`).
+**Gate:** every `data-testid` listed in the tables below must exist in `src/**` (`./bin/verify` → `feature-map-testids`). CI `quality` runs the same `./bin/verify` and uploads `logs/verify.json` as Actions artifact `verify-logs`.
 
 ## Features
 
