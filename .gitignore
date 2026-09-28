@@ -1,0 +1,15 @@
+!.env.example
+*.local
+*.tsbuildinfo
+.DS_Store
+.env
+.env.*
+coverage
+dist
+dist-ssr
+logs/*.log
+logs/step-*.log
+logs/verify.json
+node_modules
+playwright-report
+test-results

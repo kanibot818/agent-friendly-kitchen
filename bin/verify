@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+mkdir -p logs
+
+STARTED_AT="$(date -Iseconds)"
+OVERALL_OK=true
+EXIT_CODE=0
+
+TMP_DIR="$(mktemp -d)"
+trap 'rm -rf "$TMP_DIR"' EXIT
+
+run_step() {
+  local name="$1"
+  shift
+  local start_ms end_ms duration_ms status
+  start_ms="$(date +%s%3N)"
+  set +e
+  "$@" >"logs/step-${name}.log" 2>&1
+  status=$?
+  set -e
+  end_ms="$(date +%s%3N)"
+  duration_ms=$((end_ms - start_ms))
+
+  if [[ "$status" -eq 0 ]]; then
+    printf '{"name":"%s","ok":true,"durationMs":%s,"detail":"ok"}\n' "$name" "$duration_ms" >>"$TMP_DIR/steps.jsonl"
+    printf '[verify] OK   %s (%sms)\n' "$name" "$duration_ms"
+  else
+    OVERALL_OK=false
+    EXIT_CODE=1
+    printf '{"name":"%s","ok":false,"durationMs":%s,"detail":"exit %s; see logs/step-%s.log"}\n' \
+      "$name" "$duration_ms" "$status" "$name" >>"$TMP_DIR/steps.jsonl"
+    printf '[verify] FAIL %s (%sms)\n' "$name" "$duration_ms"
+  fi
+}
+
+run_step typecheck npm run typecheck
+run_step lint npm run lint
+run_step unit npm run test
+run_step build npm run build
+run_step e2e npm run test:e2e
+
+FINISHED_AT="$(date -Iseconds)"
+
+SUCCESS_JSON=false
+if [[ "$OVERALL_OK" == true ]]; then
+  SUCCESS_JSON=true
+fi
+
+python3 - "$TMP_DIR/steps.jsonl" "logs/verify.json" "$STARTED_AT" "$FINISHED_AT" "$SUCCESS_JSON" "$EXIT_CODE" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+steps_path, out_path, started, finished, success, exit_code = sys.argv[1:7]
+steps = []
+with open(steps_path, encoding="utf-8") as handle:
+    for line in handle:
+        line = line.strip()
+        if line:
+            steps.append(json.loads(line))
+
+payload = {
+    "timestamp": finished,
+    "startedAt": started,
+    "finishedAt": finished,
+    "success": success.lower() == "true",
+    "exitCode": int(exit_code),
+    "steps": steps,
+}
+
+Path(out_path).write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+print(json.dumps(payload, indent=2))
+PY
+
+exit "$EXIT_CODE"
