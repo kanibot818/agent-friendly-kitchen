@@ -11,7 +11,7 @@ Navigation map for agent-friendly work in this repository.
 | Path | `/` (default route; single-page app) |
 | Public API | `src/features/hello/index.ts` |
 | UI | `HelloView` |
-| Logic | `nextGreeting`, `INITIAL_GREETING` |
+| Logic | `nextGreeting`, `INITIAL_GREETING`, `formatLastGreetedAt` |
 | Types | `GreetingState`, `GreetingTone`, `GreetingAction` |
 | Unit tests | `src/features/hello/helloLogic.test.ts` |
 | E2E | `e2e/hello.spec.ts` |
@@ -20,9 +20,10 @@ Navigation map for agent-friendly work in this repository.
 
 1. Open the app at `/`.
 2. Read the greeting text in `hello-message` (`Hello, kitchen`).
-3. Click `hello-greet-button` to advance the greeting via an explicit click handler (no `useEffect`).
-4. Observe `hello-message` and `hello-count` update.
-5. Click `hello-reset-button` to restore the initial greeting.
+3. Read `hello-last-greeted` (`尚未打招呼` before any greet).
+4. Click `hello-greet-button` to advance the greeting via an explicit click handler (no `useEffect`).
+5. Observe `hello-message`, `hello-count`, and `hello-last-greeted` update (last greeted shows a local formatted time).
+6. Click `hello-reset-button` to restore the initial greeting and clear last greeted back to `尚未打招呼`.
 
 #### data-testid list
 
@@ -34,6 +35,7 @@ Navigation map for agent-friendly work in this repository.
 | `hello-title` | Heading | App / feature title |
 | `hello-message` | Paragraph | Current greeting text |
 | `hello-count` | Paragraph | Number of greet actions |
+| `hello-last-greeted` | Paragraph | Last greet time or never-greeted copy |
 | `hello-greet-button` | Button | Triggers greet action |
 | `hello-reset-button` | Button | Triggers reset action |
 
