@@ -2,6 +2,8 @@
 
 Operating notes for coding agents working in this repository.
 
+**Outer loop:** see `OUTER_LOOP.md` (開工／自審：`docs/start-checklist.md`、`docs/self-review.md`).
+
 ## SOP (required)
 
 1. **Read FEATURE_MAP** — Open `FEATURE_MAP.md` first. Learn navigation paths, public APIs, `data-testid` values, and user flows before changing code.

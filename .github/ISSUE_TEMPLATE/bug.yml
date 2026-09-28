@@ -4,20 +4,49 @@ title: "[bug] "
 labels: ["type: bug"]
 body:
   - type: textarea
-    id: what
+    id: why
     attributes:
-      label: 做什麼（或問題）
-      description: 發生什麼、預期 vs 實際
-      placeholder: 例：點儲存後畫面空白
+      label: Why
+      description: 為什麼是 bug（預期 vs 實際）
+      placeholder: 例：預期點儲存後回到列表；實際畫面空白
+    validations:
+      required: true
+  - type: textarea
+    id: in
+    attributes:
+      label: IN
+      description: 具體要修的行為或表面
+      placeholder: |
+        - 修復儲存後導回列表
+        - 錯誤時顯示訊息而非空白
+    validations:
+      required: true
+  - type: textarea
+    id: out
+    attributes:
+      label: OUT
+      description: 明確不做什麼（至少兩點）
+      placeholder: |
+        - 不順便重構表單
+        - 不擴 scope 到其他頁
     validations:
       required: true
   - type: textarea
     id: acceptance
     attributes:
-      label: 驗收標準
-      description: 怎樣算修完
+      label: Acceptance
+      description: 可勾選、可證偽的驗收（差不多＝不過）
       placeholder: |
-        - [ ] …
-        - [ ] …
+        - [ ] 點儲存後回到列表且資料在
+        - [ ] 失敗時有錯誤訊息
+        - [ ] ./bin/verify 綠
     validations:
       required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks／Notes
+      description: 選填。滑移／破壞點；已知 owner
+      placeholder: 例：可能影響樂觀更新；先對齊 FEATURE_MAP
+    validations:
+      required: false
