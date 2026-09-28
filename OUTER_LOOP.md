@@ -15,6 +15,7 @@
 
 - 產品功能 PR **不合入 main**，除非老闆說合。
 - 無 auto-merge；無未請示擴 OUT。
+- UI／視覺 PR：自審前必須有 light＋dark 截圖（見 [self-review](docs/self-review.md)）。
 - 細節：`docs/start-checklist.md`、`docs/self-review.md`；規格來源：`docs/outer-loop-hardening.md`
 
 ## 老闆短 handoff 四段式
