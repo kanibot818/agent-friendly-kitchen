@@ -5,7 +5,7 @@
 ## 固定順序
 
 1. **老闆開單** — 用 Feature／Bug 範本（Why／IN／OUT／Acceptance；Risks 選填）
-2. **`Issue #N 開工`** — 在 Keroro 說這句；小隊照 [開工 checklist](docs/start-checklist.md) 開工
+2. **`Issue #N 開工`** — 在 Keroro 說這句；小隊跑 `./bin/kickoff-issue N`（印 Why／IN／OUT、從最新 main 開 `feat/<n>-slug`、提醒 checklist），再照 [開工 checklist](docs/start-checklist.md) 開工
 3. **小隊** — 實作 → 開 PR（原子、短 body、`./bin/verify` 綠）；**不合入 main**
 4. **Keroro 自審** — 照 [自審 checklist](docs/self-review.md)；**差不多＝不過**
 5. **短 handoff** — 四段式交老闆（見下／自審文件）
