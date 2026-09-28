@@ -1,0 +1,23 @@
+name: Feature
+description: 新功能／產品需求
+title: "[feature] "
+labels: ["type: feature"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: 做什麼
+      description: 一句話或幾點說明要做什麼
+      placeholder: 例：設定頁可開關通知
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 驗收標準
+      description: 怎樣算完成（可勾選的條件）
+      placeholder: |
+        - [ ] …
+        - [ ] …
+    validations:
+      required: true
