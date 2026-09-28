@@ -28,7 +28,7 @@ export function UserProfileView() {
   };
 
   return (
-    <section data-testid="user-profile-root" className="user-profile">
+    <section data-testid="user-profile-root" className="user-profile card">
       <h2 data-testid="user-profile-title">User Profile</h2>
       {state.mode === "view" ? (
         <div data-testid="user-profile-card" className="user-profile-card">
@@ -40,6 +40,7 @@ export function UserProfileView() {
           <div className="user-profile-actions">
             <button
               type="button"
+              className="btn btn-primary"
               data-testid="edit-btn"
               onClick={handleEdit}
             >
@@ -56,7 +57,7 @@ export function UserProfileView() {
             handleSave();
           }}
         >
-          <label className="user-profile-field">
+          <label className="field user-profile-field">
             <span>姓名</span>
             <input
               data-testid="user-name-input"
@@ -65,7 +66,7 @@ export function UserProfileView() {
               onChange={(event) => handleNameChange(event.target.value)}
             />
           </label>
-          <label className="user-profile-field">
+          <label className="field user-profile-field">
             <span>Email</span>
             <input
               data-testid="user-email-input"
@@ -75,7 +76,7 @@ export function UserProfileView() {
             />
           </label>
           <div className="user-profile-actions">
-            <button type="submit" data-testid="save-btn">
+            <button type="submit" className="btn btn-primary" data-testid="save-btn">
               儲存
             </button>
           </div>
