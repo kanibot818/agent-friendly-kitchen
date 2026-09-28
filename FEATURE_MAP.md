@@ -82,3 +82,37 @@ Navigation map for agent-friendly work in this repository.
 
 - Outside the feature, import only from `@/features/user-profile` or `./features/user-profile` (the barrel).
 - Deep imports such as `./features/user-profile/UserProfileView` are lint errors.
+
+### settings-toggle
+
+| Field | Value |
+| --- | --- |
+| Path | `/` (same page below user-profile) |
+| Public API | `src/features/settings-toggle/index.ts` |
+| UI | `SettingsToggleView` |
+| Logic | `nextSettingsToggle`, `INITIAL_SETTINGS_TOGGLE`, `settingsToggleStatusLabel` |
+| Types | `SettingsToggleState`, `SettingsToggleAction` |
+| Unit tests | `src/features/settings-toggle/settingsToggleLogic.test.ts` |
+| E2E | `e2e/settings-toggle.spec.ts` |
+
+#### User flows
+
+1. Open the app at `/`.
+2. Read the settings panel: `settings-toggle-title` shows `通知設定`, and `settings-toggle-status` shows `狀態：關閉` by default.
+3. Click `settings-toggle-btn` (開啟通知) to flip `notificationsEnabled` via an explicit click handler (no `useEffect`).
+4. Observe `settings-toggle-status` update to `狀態：開啟` and the button label become `關閉通知`.
+5. Click `settings-toggle-btn` again to restore `狀態：關閉`.
+
+#### data-testid list
+
+| testid | Element | Purpose |
+| --- | --- | --- |
+| `settings-toggle-root` | Section | Feature root for e2e |
+| `settings-toggle-title` | Heading | Feature title (`通知設定`) |
+| `settings-toggle-status` | Paragraph | Current on/off status (`開啟` / `關閉`) |
+| `settings-toggle-btn` | Button | Toggles notifications enabled |
+
+#### Import rules
+
+- Outside the feature, import only from `@/features/settings-toggle` or `./features/settings-toggle` (the barrel).
+- Deep imports such as `./features/settings-toggle/SettingsToggleView` are lint errors.

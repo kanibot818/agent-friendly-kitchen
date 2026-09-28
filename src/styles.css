@@ -128,3 +128,46 @@ body {
   flex-direction: column;
   align-items: stretch;
 }
+
+.settings-toggle {
+  width: min(28rem, 100%);
+  background: #fff;
+  border: 1px solid #ddd5c6;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  margin-top: 1.5rem;
+}
+
+.settings-toggle h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+}
+
+.settings-toggle p {
+  margin: 0.35rem 0;
+}
+
+.settings-toggle-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.settings-toggle button {
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: #2f6fed;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+}
+
+.settings-toggle button:hover {
+  filter: brightness(1.05);
+}
+
+.settings-toggle button[aria-pressed="true"] {
+  background: #1f7a3f;
+}
