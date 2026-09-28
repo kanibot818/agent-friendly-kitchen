@@ -22,6 +22,7 @@ The agent must not claim “done and tested” in prose alone. The PR must show 
 
 - [ ] `FEATURE_MAP.md` updated for new or changed navigation, APIs, and user flows
 - [ ] Interactive controls have `data-testid` values recorded in `FEATURE_MAP.md`
+- [ ] `feature-map-diff` green: any `src/features/**` change includes `FEATURE_MAP.md` in the same diff (enforced by `./bin/verify`)
 
 ## 4. Atomic PR and SOP
 
