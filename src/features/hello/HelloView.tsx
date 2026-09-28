@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { INITIAL_GREETING, nextGreeting } from "./helloLogic";
+import {
+  formatLastGreetedAt,
+  INITIAL_GREETING,
+  nextGreeting,
+} from "./helloLogic";
 import type { GreetingState } from "./helloTypes";
 
 export function HelloView() {
@@ -21,6 +25,9 @@ export function HelloView() {
       </p>
       <p data-testid="hello-count" className="text-muted">
         Greetings: {state.greetCount}
+      </p>
+      <p data-testid="hello-last-greeted" className="text-muted">
+        {formatLastGreetedAt(state.lastGreetedAt)}
       </p>
       <div className="hello-actions">
         <button
