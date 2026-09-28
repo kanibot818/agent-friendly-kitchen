@@ -4,20 +4,49 @@ title: "[feature] "
 labels: ["type: feature"]
 body:
   - type: textarea
-    id: what
+    id: why
     attributes:
-      label: 做什麼
-      description: 一句話或幾點說明要做什麼
-      placeholder: 例：設定頁可開關通知
+      label: Why
+      description: 為什麼要做（痛點／目標）
+      placeholder: 例：設定頁找不到通知開關，使用者以為壞了
+    validations:
+      required: true
+  - type: textarea
+    id: in
+    attributes:
+      label: IN
+      description: 具體要做的行為或表面（範圍鎖在這裡）
+      placeholder: |
+        - 設定頁加「通知」開關
+        - 開關狀態寫入 localStorage
+    validations:
+      required: true
+  - type: textarea
+    id: out
+    attributes:
+      label: OUT
+      description: 明確不做什麼（至少兩點）
+      placeholder: |
+        - 不做推播後端
+        - 不改其他設定項 UI
     validations:
       required: true
   - type: textarea
     id: acceptance
     attributes:
-      label: 驗收標準
-      description: 怎樣算完成（可勾選的條件）
+      label: Acceptance
+      description: 可勾選、可證偽的驗收（差不多＝不過）
       placeholder: |
-        - [ ] …
-        - [ ] …
+        - [ ] 設定頁可見通知開關
+        - [ ] 重整後狀態仍保留
+        - [ ] ./bin/verify 綠
     validations:
       required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks／Notes
+      description: 選填。滑移／破壞點；已知 owner
+      placeholder: 例：與 theme-toggle 共用 storage key 需確認
+    validations:
+      required: false

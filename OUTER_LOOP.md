@@ -1,8 +1,27 @@
 # Outer Loop（外圈）
 
-1. 在 GitHub 開 Issue（選 Feature / Bug 範本）
-2. 在 Keroro 說：`Issue #N 開工`
-3. 小隊實作 → 開 PR（隊長 self-review）
-4. 你在 Keroro 回：`合` / `不合`
+可執行手冊。順序固定，不跳步。
 
-產品功能 PR 不合入 main，除非你說合。
+## 固定順序
+
+1. **老闆開單** — 用 Feature／Bug 範本（Why／IN／OUT／Acceptance；Risks 選填）
+2. **`Issue #N 開工`** — 在 Keroro 說這句；小隊照 [開工 checklist](docs/start-checklist.md) 開工
+3. **小隊** — 實作 → 開 PR（原子、短 body、`./bin/verify` 綠）；**不合入 main**
+4. **Keroro 自審** — 照 [自審 checklist](docs/self-review.md)；**差不多＝不過**
+5. **短 handoff** — 四段式交老闆（見下／自審文件）
+6. **合／不合** — 老闆在 Keroro 回；產品功能 PR **不合入 main**，除非老闆說 **合**
+
+## 鐵則
+
+- 產品功能 PR **不合入 main**，除非老闆說合。
+- 無 auto-merge；無未請示擴 OUT。
+- 細節：`docs/start-checklist.md`、`docs/self-review.md`；規格來源：`docs/outer-loop-hardening.md`
+
+## 老闆短 handoff 四段式
+
+Keroro Pass 後交老闆，只寫這四段（細節放連結）：
+
+- **What** — 1–3 行：改了什麼
+- **Green lights** — verify／CI／preview（有則附連結）
+- **Decide** — 合／不合，或唯一要老闆選的點
+- **Links** — Issue／PR／預覽
