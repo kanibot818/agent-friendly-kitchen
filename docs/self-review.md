@@ -8,7 +8,7 @@
 
 - [ ] 對齊 Acceptance：每一項可勾或可指出證據；不可「方向對了」
 - [ ] **一眼可見／行為**：UI／文案／流程有差時，打開預覽或路徑，肉眼／操作能看出對齊；看不出差＝不過
-- [ ] `./bin/verify`（或同等）綠；CI 綠（或已說明為何本 PR 僅 docs／yml 仍跑過）
+- [ ] `./bin/verify`（或同等）綠；CI 綠（或已說明為何本 PR 僅 docs／yml 仍跑過）；實證看 Actions artifact `verify-logs` → `verify.json`
 - [ ] PR／交付未越 OUT；無自動 merge、無未請示擴 scope
 - [ ] 短 handoff 四段式齊全（見下）
 
