@@ -21,7 +21,7 @@ export function ThemeToggleView() {
   return (
     <section
       data-testid="theme-toggle-root"
-      className="theme-toggle card"
+      className="theme-toggle section"
       data-theme={state.theme}
     >
       <h2 data-testid="theme-toggle-title">主題設定</h2>

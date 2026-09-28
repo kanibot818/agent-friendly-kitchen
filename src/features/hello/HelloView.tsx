@@ -14,7 +14,7 @@ export function HelloView() {
   };
 
   return (
-    <section data-testid="hello-root" className="hello card card-hero">
+    <section data-testid="hello-root" className="hello section">
       <h1 data-testid="hello-title">Agent Friendly Kitchen</h1>
       <p data-testid="hello-message" data-tone={state.tone}>
         {state.message}

@@ -28,7 +28,7 @@ export function UserProfileView() {
   };
 
   return (
-    <section data-testid="user-profile-root" className="user-profile card">
+    <section data-testid="user-profile-root" className="user-profile section">
       <h2 data-testid="user-profile-title">User Profile</h2>
       {state.mode === "view" ? (
         <div data-testid="user-profile-card" className="user-profile-card">

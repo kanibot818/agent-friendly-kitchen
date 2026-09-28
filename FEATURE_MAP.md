@@ -29,6 +29,7 @@ Navigation map for agent-friendly work in this repository.
 | testid | Element | Purpose |
 | --- | --- | --- |
 | `app-shell` | Shell wrapper | App chrome container |
+| `app-chrome` | Top chrome bar | Lab console product name + meta |
 | `app-main` | Main landmark | Primary content region |
 | `hello-root` | Hello feature section | Feature root for e2e |
 | `hello-title` | Heading | App / feature title |

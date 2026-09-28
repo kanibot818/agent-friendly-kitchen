@@ -15,7 +15,7 @@ export function SettingsToggleView() {
   const statusLabel = settingsToggleStatusLabel(state);
 
   return (
-    <section data-testid="settings-toggle-root" className="settings-toggle card">
+    <section data-testid="settings-toggle-root" className="settings-toggle section">
       <h2 data-testid="settings-toggle-title">通知設定</h2>
       <p data-testid="settings-toggle-status" className="text-muted">
         狀態：{statusLabel}
