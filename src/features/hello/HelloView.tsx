@@ -14,12 +14,14 @@ export function HelloView() {
   };
 
   return (
-    <section data-testid="hello-root" className="hello card">
+    <section data-testid="hello-root" className="hello card card-hero">
       <h1 data-testid="hello-title">Agent Friendly Kitchen</h1>
       <p data-testid="hello-message" data-tone={state.tone}>
         {state.message}
       </p>
-      <p data-testid="hello-count">Greetings: {state.greetCount}</p>
+      <p data-testid="hello-count" className="text-muted">
+        Greetings: {state.greetCount}
+      </p>
       <div className="hello-actions">
         <button
           type="button"

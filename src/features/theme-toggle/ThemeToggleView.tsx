@@ -25,7 +25,9 @@ export function ThemeToggleView() {
       data-theme={state.theme}
     >
       <h2 data-testid="theme-toggle-title">主題設定</h2>
-      <p data-testid="theme-toggle-status">主題：{statusLabel}</p>
+      <p data-testid="theme-toggle-status" className="text-muted">
+        主題：{statusLabel}
+      </p>
       <div className="theme-toggle-actions">
         <button
           type="button"
