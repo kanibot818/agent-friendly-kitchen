@@ -17,7 +17,9 @@ export function SettingsToggleView() {
   return (
     <section data-testid="settings-toggle-root" className="settings-toggle card">
       <h2 data-testid="settings-toggle-title">通知設定</h2>
-      <p data-testid="settings-toggle-status">狀態：{statusLabel}</p>
+      <p data-testid="settings-toggle-status" className="text-muted">
+        狀態：{statusLabel}
+      </p>
       <div className="settings-toggle-actions">
         <button
           type="button"
