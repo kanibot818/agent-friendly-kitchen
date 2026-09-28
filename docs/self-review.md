@@ -4,6 +4,8 @@
 
 規則：**差不多＝不過**。Fail → 具體 redo 點退回；Pass → 才寫短 handoff。
 
+驗收標準見 [ACCEPTANCE_RUBRIC.md](../ACCEPTANCE_RUBRIC.md)：綠燈＋經驗證據，不靠逐行讀碼。
+
 - [ ] 對齊 Acceptance：每一項可勾或可指出證據；不可「方向對了」
 - [ ] **一眼可見／行為**：UI／文案／流程有差時，打開預覽或路徑，肉眼／操作能看出對齊；看不出差＝不過
 - [ ] `./bin/verify`（或同等）綠；CI 綠（或已說明為何本 PR 僅 docs／yml 仍跑過）

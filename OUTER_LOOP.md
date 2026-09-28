@@ -13,6 +13,7 @@
 
 ## 鐵則
 
+- **驗收**：老闆／Keroro 依 [ACCEPTANCE_RUBRIC.md](ACCEPTANCE_RUBRIC.md) — 綠燈＋經驗證據，不靠逐行讀碼。
 - 產品功能 PR **不合入 main**，除非老闆說合。
 - 無 auto-merge；無未請示擴 OUT。
 - 細節：`docs/start-checklist.md`、`docs/self-review.md`；規格來源：`docs/outer-loop-hardening.md`
