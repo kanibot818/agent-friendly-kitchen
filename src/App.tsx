@@ -2,6 +2,7 @@ import { AppShell } from "./app";
 import { HelloView } from "./features/hello";
 import { UserProfileView } from "./features/user-profile";
 import { SettingsToggleView } from "./features/settings-toggle";
+import { ThemeToggleView } from "./features/theme-toggle";
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <HelloView />
       <UserProfileView />
       <SettingsToggleView />
+      <ThemeToggleView />
     </AppShell>
   );
 }

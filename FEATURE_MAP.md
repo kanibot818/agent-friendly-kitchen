@@ -116,3 +116,37 @@ Navigation map for agent-friendly work in this repository.
 
 - Outside the feature, import only from `@/features/settings-toggle` or `./features/settings-toggle` (the barrel).
 - Deep imports such as `./features/settings-toggle/SettingsToggleView` are lint errors.
+
+### theme-toggle
+
+| Field | Value |
+| --- | --- |
+| Path | `/` (same page below settings-toggle) |
+| Public API | `src/features/theme-toggle/index.ts` |
+| UI | `ThemeToggleView` |
+| Logic | `nextThemeToggle`, `INITIAL_THEME_TOGGLE`, `themeToggleStatusLabel` |
+| Types | `ThemeMode`, `ThemeToggleState`, `ThemeToggleAction` |
+| Unit tests | `src/features/theme-toggle/themeToggleLogic.test.ts` |
+| E2E | `e2e/theme-toggle.spec.ts` |
+
+#### User flows
+
+1. Open the app at `/`.
+2. Read the theme panel: `theme-toggle-title` shows `主題設定`, and `theme-toggle-status` shows `主題：淺色` by default.
+3. Click `theme-toggle-btn` (切換深色) to flip theme via an explicit click handler (no `useEffect`); the handler also sets `data-theme` on `document.documentElement`.
+4. Observe `theme-toggle-status` update to `主題：深色` and the button label become `切換淺色`.
+5. Click `theme-toggle-btn` again to restore `主題：淺色`.
+
+#### data-testid list
+
+| testid | Element | Purpose |
+| --- | --- | --- |
+| `theme-toggle-root` | Section | Feature root for e2e |
+| `theme-toggle-title` | Heading | Feature title (`主題設定`) |
+| `theme-toggle-status` | Paragraph | Current theme status (`淺色` / `深色`) |
+| `theme-toggle-btn` | Button | Toggles light/dark theme |
+
+#### Import rules
+
+- Outside the feature, import only from `@/features/theme-toggle` or `./features/theme-toggle` (the barrel).
+- Deep imports such as `./features/theme-toggle/ThemeToggleView` are lint errors.
