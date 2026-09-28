@@ -2,6 +2,8 @@
 
 Navigation map for agent-friendly work in this repository.
 
+**Gate:** every `data-testid` listed in the tables below must exist in `src/**` (`./bin/verify` → `feature-map-testids`).
+
 ## Features
 
 ### hello

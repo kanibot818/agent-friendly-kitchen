@@ -9,7 +9,7 @@ Operating notes for coding agents working in this repository.
 ## SOP (required)
 
 1. **Read FEATURE_MAP** — Open `FEATURE_MAP.md` first. Learn navigation paths, public APIs, `data-testid` values, and user flows before changing code.
-2. **Run verify** — Execute `./bin/verify` (or `npm run verify`). This runs typecheck, lint, unit tests, production build, and Playwright e2e.
+2. **Run verify** — Execute `./bin/verify` (or `npm run verify`). This runs FEATURE_MAP↔`data-testid` drift check, typecheck, lint, unit tests, production build, and Playwright e2e. Every testid listed in `FEATURE_MAP.md` must exist in `src/**`.
 3. **Read verify.json and self-check** — Inspect `./logs/verify.json`. Confirm `success` is `true`, `exitCode` is `0`, and every step has `"ok": true`. If anything failed, fix before continuing.
 4. **Pass CI before PR** — Locally run the CI-equivalent gate: `npm run typecheck && npm run lint && npm run test && npm run build`. All must exit 0. E2E is covered by verify / the workflow `test:e2e` job when browsers are available.
 
@@ -27,6 +27,7 @@ Operating notes for coding agents working in this repository.
 - **No React `useEffect`**. Prefer explicit event handlers and derived state. Importing `useEffect` from `react` is a lint error.
 - Keep TypeScript strict; do not weaken `tsconfig` options to hide errors.
 - Do not leave TODO stubs that break verify or CI.
+- **FEATURE_MAP testids must exist in src** — `./bin/verify` runs `bin/check-feature-map-testids.mjs`; map→src drift fails the gate.
 
 ## Quick commands
 
