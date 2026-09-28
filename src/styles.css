@@ -62,3 +62,69 @@ body {
 .hello button:hover {
   filter: brightness(1.05);
 }
+
+.user-profile {
+  width: min(28rem, 100%);
+  background: #fff;
+  border: 1px solid #ddd5c6;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  margin-top: 1.5rem;
+}
+
+.user-profile h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+}
+
+.user-profile-card p,
+.user-profile-form p {
+  margin: 0.35rem 0;
+}
+
+.user-profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+  font: inherit;
+}
+
+.user-profile-field input {
+  border: 1px solid #cfc6b6;
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  font: inherit;
+}
+
+.user-profile-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.user-profile button {
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: #2f6fed;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+}
+
+.user-profile button:hover {
+  filter: brightness(1.05);
+}
+
+[data-testid="save-success"] {
+  color: #1f7a3f;
+  font-weight: 600;
+}
+
+.app-shell main {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
