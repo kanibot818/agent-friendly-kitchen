@@ -1,0 +1,23 @@
+name: Bug
+description: 問題／缺陷回報
+title: "[bug] "
+labels: ["type: bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: 做什麼（或問題）
+      description: 發生什麼、預期 vs 實際
+      placeholder: 例：點儲存後畫面空白
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 驗收標準
+      description: 怎樣算修完
+      placeholder: |
+        - [ ] …
+        - [ ] …
+    validations:
+      required: true
